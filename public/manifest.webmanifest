@@ -1,0 +1,18 @@
+{
+  "name": "ZERO TO HERO — Roman Urdu Learning Game",
+  "short_name": "Zero to Hero",
+  "description": "Start From Zero. Become a Hero. Roman Urdu parhna aur likhna seekho.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FDFBF5",
+  "theme_color": "#FDFBF5",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
