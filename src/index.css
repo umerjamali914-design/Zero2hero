@@ -5,21 +5,29 @@
   --font-display: "Fredoka", "Nunito", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
-  --color-cream: #FDFBF5;
-  --color-cream-warm: #FDF9E9;
-  --color-cream-blue: #EBF6F9;
-  --color-navy: #1D2B45;
-  --color-navy-light: #2D3748;
-  --color-orange: #FF962D;
-  --color-orange-light: #FFAE2D;
-  --color-gray-text: #8F949E;
-  --color-gray-soft: #A8A8A8;
+  /* Dark navy theme (matching reference) */
+  --color-bg: #0f111a;
+  --color-bg-deep: #0c0e16;
+  --color-card: #1a1d29;
+  --color-card-hover: #222636;
+  --color-cream: #0f111a;
+  --color-cream-warm: #0c0e16;
+  --color-cream-blue: #12141f;
+  --color-navy: #ffffff;
+  --color-navy-light: #a0a0b0;
+  --color-orange: #ffcc66;
+  --color-orange-light: #ffd680;
+  --color-orange-dark: #e6b35a;
+  --color-gray-text: #a0a0b0;
+  --color-gray-soft: #6b6d7a;
+  --color-border: #2a2e3d;
+  --color-border-light: #222530;
 
-  --color-correct: #34A853;
-  --color-wrong: #EA4335;
-  --color-gold: #F5B400;
-  --color-purple: #8B5CF6;
-  --color-sky: #4A90D9;
+  --color-correct: #4ade80;
+  --color-wrong: #f87171;
+  --color-gold: #fbbf24;
+  --color-purple: #a78bfa;
+  --color-sky: #60a5fa;
 }
 
 * {
@@ -31,7 +39,7 @@ html, body {
   margin: 0;
   padding: 0;
   font-family: var(--font-sans);
-  background: var(--color-cream);
+  background: var(--color-bg);
   color: var(--color-navy);
   overscroll-behavior-y: none;
   -webkit-user-select: none;
@@ -39,9 +47,10 @@ html, body {
 }
 
 body {
+  background: var(--color-bg);
   background-image:
-    radial-gradient(60% 40% at 20% 0%, rgba(253, 249, 233, 1) 0%, transparent 70%),
-    radial-gradient(50% 40% at 100% 100%, rgba(235, 246, 249, 1) 0%, transparent 70%);
+    radial-gradient(50% 30% at 20% 0%, rgba(255, 204, 102, 0.06) 0%, transparent 70%),
+    radial-gradient(40% 30% at 100% 100%, rgba(96, 165, 250, 0.05) 0%, transparent 70%);
   background-attachment: fixed;
   min-height: 100vh;
   min-height: 100dvh;
@@ -94,8 +103,8 @@ input, textarea {
 }
 
 @keyframes glow-pulse {
-  0%, 100% { box-shadow: 0 0 12px rgba(255, 150, 45, 0.3); }
-  50% { box-shadow: 0 0 24px rgba(255, 150, 45, 0.6); }
+  0%, 100% { box-shadow: 0 0 12px rgba(255, 204, 102, 0.3); }
+  50% { box-shadow: 0 0 24px rgba(255, 204, 102, 0.6); }
 }
 
 @keyframes spin {
@@ -118,4 +127,4 @@ input, textarea {
 /* Scrollbar */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgba(29, 43, 69, 0.2); border-radius: 3px; }
+::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 3px; }

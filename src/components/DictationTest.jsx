@@ -3,6 +3,9 @@ import { playWord, sfx } from '../lib/audio.js'
 
 const PASS_SCORE = 80;
 
+const btnPrimary = { background: 'var(--color-orange)', color: '#1a1d29' };
+const btnGhost = { background: 'var(--color-card)', border: '1px solid var(--color-border)', color: 'var(--color-navy)' };
+
 export default function DictationTest({ level, items, onComplete, onBack }) {
   const [itemIdx, setItemIdx] = useState(0)
   const [input, setInput] = useState('')
@@ -15,17 +18,14 @@ export default function DictationTest({ level, items, onComplete, onBack }) {
   const [finalScore, setFinalScore] = useState(0)
   const inputRef = useRef(null)
 
-  // Build dictation items from the level items
   const dictItems = items.length > 0 ? items : [{ id: 'empty', roman: '', urdu: '', hint: '' }];
   const currentItem = dictItems[Math.min(itemIdx, dictItems.length - 1)];
 
-  // Auto-play audio on new item
   useEffect(() => {
     if (currentItem && currentItem.roman) {
       setHasPlayed(false);
       setShowAnswer(false);
       setInput('');
-      // Auto-play after a short delay
       const timer = setTimeout(() => {
         playWord(currentItem.roman);
         setHasPlayed(true);
@@ -34,7 +34,6 @@ export default function DictationTest({ level, items, onComplete, onBack }) {
     }
   }, [itemIdx, currentItem]);
 
-  // Focus input
   useEffect(() => {
     if (inputRef.current && !finished) {
       inputRef.current.focus();
@@ -69,7 +68,6 @@ export default function DictationTest({ level, items, onComplete, onBack }) {
         if (itemIdx + 1 < dictItems.length) {
           setItemIdx(i => i + 1);
         } else {
-          // Dictation complete
           const score = Math.round((correctCount + 1) / dictItems.length * 100);
           setFinalScore(score);
           setFinished(true);
@@ -103,14 +101,14 @@ export default function DictationTest({ level, items, onComplete, onBack }) {
   if (finished) {
     const passed = finalScore >= PASS_SCORE;
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center px-6" style={{ minHeight: '100dvh' }}>
+      <div className="min-h-screen flex flex-col items-center justify-center px-6" style={{ minHeight: '100dvh', background: 'var(--color-bg)' }}>
         <div className={`text-7xl mb-4 animate-star-burst`}>
           {passed ? '🎉' : '💪'}
         </div>
         <h1 className="font-display text-2xl font-bold mb-2" style={{ color: 'var(--color-navy)' }}>
           {passed ? 'Dictation Pass!' : 'Phir Koshish Karein'}
         </h1>
-        <div className="my-4 p-4 rounded-2xl" style={{ background: 'rgba(29,43,69,0.04)' }}>
+        <div className="my-4 p-4 rounded-2xl" style={{ background: 'var(--color-card)', border: '1px solid var(--color-border)' }}>
           <p className="text-center text-sm" style={{ color: 'var(--color-gray-text)' }}>
             Score
           </p>
@@ -130,16 +128,16 @@ export default function DictationTest({ level, items, onComplete, onBack }) {
         {passed ? (
           <button
             onClick={() => onComplete(finalScore)}
-            className="px-10 py-4 rounded-full text-white font-bold text-lg transition-transform active:scale-95 animate-glow"
-            style={{ background: 'linear-gradient(135deg, var(--color-orange-light), var(--color-orange))' }}
+            className="px-10 py-4 rounded-full font-bold text-lg transition-transform active:scale-95 animate-glow"
+            style={btnPrimary}
           >
             Agla Level →
           </button>
         ) : (
           <button
             onClick={handleRetry}
-            className="px-10 py-4 rounded-full text-white font-bold text-lg transition-transform active:scale-95"
-            style={{ background: 'linear-gradient(135deg, var(--color-orange-light), var(--color-orange))' }}
+            className="px-10 py-4 rounded-full font-bold text-lg transition-transform active:scale-95"
+            style={btnPrimary}
           >
             Phir Koshish Karo →
           </button>
@@ -156,7 +154,7 @@ export default function DictationTest({ level, items, onComplete, onBack }) {
         <button
           onClick={() => { sfx.click(); onBack(); }}
           className="px-3 py-1.5 rounded-full text-xs font-semibold transition-transform active:scale-95"
-          style={{ background: 'rgba(29,43,69,0.06)', color: 'var(--color-navy)' }}
+          style={btnGhost}
         >
           ← Wapas
         </button>
@@ -168,15 +166,13 @@ export default function DictationTest({ level, items, onComplete, onBack }) {
         </span>
       </header>
 
-      {/* Progress */}
-      <div className="w-full h-1.5 rounded-full overflow-hidden mb-6" style={{ background: 'rgba(29,43,69,0.08)' }}>
-        <div
-          className="h-full rounded-full transition-all duration-300"
-          style={{
-            width: `${(itemIdx / dictItems.length) * 100}%`,
-            background: 'linear-gradient(90deg, var(--color-orange), var(--color-orange-light))',
-          }}
-        />
+      {/* Progress segments */}
+      <div className="flex items-center gap-1 mb-6">
+        {dictItems.map((_, i) => (
+          <div key={i} className="flex-1 h-1.5 rounded-full" style={{
+            background: i <= itemIdx ? 'var(--color-orange)' : 'var(--color-border)',
+          }} />
+        ))}
       </div>
 
       {/* Dictation content */}
@@ -190,14 +186,13 @@ export default function DictationTest({ level, items, onComplete, onBack }) {
           onClick={handlePlayAudio}
           className="w-24 h-24 rounded-full flex items-center justify-center text-4xl mb-6 transition-transform active:scale-90 animate-bounce-soft"
           style={{
-            background: 'linear-gradient(135deg, var(--color-orange-light), var(--color-orange))',
-            boxShadow: '0 8px 24px rgba(255,150,45,0.3)',
+            background: 'rgba(255,204,102,0.12)',
+            border: '2px solid var(--color-orange)',
           }}
         >
           🔊
         </button>
 
-        {/* Play again hint */}
         <button
           onClick={handlePlayAudio}
           className="text-xs mb-4 underline"
@@ -216,12 +211,12 @@ export default function DictationTest({ level, items, onComplete, onBack }) {
           placeholder="Suno aur likho..."
           className="w-full px-5 py-4 rounded-2xl text-center text-xl font-mono outline-none transition-all"
           style={{
-            background: feedback === 'correct' ? 'rgba(52,168,83,0.1)'
-              : feedback === 'wrong' ? 'rgba(234,67,53,0.1)'
-              : 'rgba(29,43,69,0.04)',
+            background: feedback === 'correct' ? 'rgba(74,222,128,0.1)'
+              : feedback === 'wrong' ? 'rgba(248,113,113,0.1)'
+              : 'var(--color-card)',
             border: feedback === 'correct' ? '2px solid var(--color-correct)'
               : feedback === 'wrong' ? '2px solid var(--color-wrong)'
-              : '2px solid rgba(29,43,69,0.1)',
+              : '2px solid var(--color-border)',
             color: 'var(--color-navy)',
           }}
           autoComplete="off"
@@ -246,7 +241,7 @@ export default function DictationTest({ level, items, onComplete, onBack }) {
 
         {/* Show answer after wrong */}
         {showAnswer && !feedback && (
-          <div className="mt-4 p-3 rounded-xl text-center animate-pop-in" style={{ background: 'rgba(234,67,53,0.06)' }}>
+          <div className="mt-4 p-3 rounded-xl text-center animate-pop-in" style={{ background: 'rgba(248,113,113,0.08)', border: '1px solid rgba(248,113,113,0.2)' }}>
             <p className="text-xs mb-1" style={{ color: 'var(--color-gray-soft)' }}>
               Sahi jawab:
             </p>
@@ -264,8 +259,8 @@ export default function DictationTest({ level, items, onComplete, onBack }) {
       <button
         onClick={handleSubmit}
         disabled={!input.trim() || feedback !== null}
-        className="w-full py-3.5 rounded-full text-white font-bold text-base transition-transform active:scale-95 disabled:opacity-40"
-        style={{ background: 'linear-gradient(135deg, var(--color-orange-light), var(--color-orange))' }}
+        className="w-full py-3.5 rounded-full font-bold text-base transition-transform active:scale-95 disabled:opacity-40"
+        style={btnPrimary}
       >
         Check Karein
       </button>

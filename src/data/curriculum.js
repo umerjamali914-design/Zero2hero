@@ -45,18 +45,18 @@ function letterLevels() {
 
 // ============ STAGE DEFINITIONS ============
 export const stages = [
-  { id: 1,  name: 'Haroof',                tagline: 'English haroof pehchano' },
-  { id: 2,  name: 'Awazein',               tagline: 'Haroof ki awazein' },
-  { id: 3,  name: 'Phonics',               tagline: 'Awaaz jodo aur todo' },
-  { id: 4,  name: 'Lafz Jodo',             tagline: 'Chhote lafz banao' },
-  { id: 5,  name: 'Syllable',              tagline: 'Lafz ko hisson mein todo' },
-  { id: 6,  name: 'Lafz Master',           tagline: 'Aasan se mushkil lafz tak' },
-  { id: 7,  name: 'Box Game',              tagline: 'Khali dabbe bharo' },
-  { id: 8,  name: 'Lafz Todo',             tagline: 'Lafz ko haroof mein todo' },
-  { id: 9,  name: 'Jumlay',                tagline: 'Poore jumlay likhna' },
-  { id: 10, name: 'Mazahiya Jumlay',       tagline: 'Hanso bhi, likho bhi' },
-  { id: 11, name: 'Islami Sabaq',          tagline: 'Achay akhlaq seekho' },
-  { id: 12, name: 'Islami Kahaniyan',      tagline: 'Pyari kahaniyan, pyare sabaq' },
+  { id: 1,  name: 'Keyboard Bunyad',       tagline: 'Keyboard kya hai, bara aur chhota harf' },
+  { id: 2,  name: 'Haroof ke Naam',        tagline: 'Sab 26 harf, bara aur chhota' },
+  { id: 3,  name: 'Haroof ki Awazein',     tagline: 'Har harf ki awaz, misaal ke saath' },
+  { id: 4,  name: 'Phonics Master',        tagline: 'Vowels, consonants, shuru aur aakhri awazein' },
+  { id: 5,  name: 'Lafz Jodo',             tagline: 'Do, teen aur chaar harf jodo' },
+  { id: 6,  name: 'Syllable',              tagline: 'Lafz ko hisson mein todo aur jodo' },
+  { id: 7,  name: 'Lafz Master',           tagline: 'Aasan se mushkil Roman Urdu lafz' },
+  { id: 8,  name: 'Box Game',              tagline: 'Khali dabbe sahi harfon se bharo' },
+  { id: 9,  name: 'Lafz Todo',             tagline: 'Lafz ko todo aur phir jodo' },
+  { id: 10, name: 'Jumlay',                tagline: 'Chhote sahi jumlay banao aur likho' },
+  { id: 11, name: 'Mazahiya aur Islami',   tagline: 'Hansne wale aur pyare Islami jumlay' },
+  { id: 12, name: 'Islami Kahaniyan',      tagline: 'Lambe kissa, sawal aur imla' },
 ];
 
 // ============ LEVEL DEFINITIONS ============

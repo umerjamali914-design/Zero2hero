@@ -14,7 +14,6 @@ export default function MusicBar() {
     sfx.click();
     if (state.musicOn) {
       stopBgm();
-      // Update state
       const event = new CustomEvent('music-toggle', { detail: false });
       window.dispatchEvent(event);
     } else {
@@ -29,10 +28,10 @@ export default function MusicBar() {
       onClick={toggleMusic}
       className="fixed bottom-4 right-4 w-11 h-11 rounded-full flex items-center justify-center text-lg z-50 transition-transform active:scale-90"
       style={{
-        background: 'rgba(255,255,255,0.8)',
+        background: 'var(--color-card)',
         backdropFilter: 'blur(8px)',
-        border: '1px solid rgba(29,43,69,0.1)',
-        boxShadow: '0 4px 12px rgba(29,43,69,0.1)',
+        border: '1px solid var(--color-border)',
+        boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
       }}
     >
       {state.musicOn ? '🎵' : '🔇'}

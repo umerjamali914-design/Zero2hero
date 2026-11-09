@@ -14,12 +14,12 @@ export default function LoadingScreen() {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center" style={{ background: 'var(--color-cream)' }}>
+    <div className="min-h-screen flex flex-col items-center justify-center" style={{ background: 'var(--color-bg)' }}>
       {/* Animated star */}
       <div className="relative mb-8">
         <div
           className="text-6xl animate-float"
-          style={{ filter: 'drop-shadow(0 4px 12px rgba(255,150,45,0.4))' }}
+          style={{ filter: 'drop-shadow(0 4px 12px rgba(255,204,102,0.4))' }}
         >
           ⭐
         </div>
@@ -27,7 +27,7 @@ export default function LoadingScreen() {
           <div
             className="w-20 h-20 rounded-full animate-spin-slow"
             style={{
-              border: '3px solid rgba(255,150,45,0.15)',
+              border: '3px solid rgba(255,204,102,0.15)',
               borderTopColor: 'var(--color-orange)',
               animationDuration: '0.8s',
             }}
@@ -43,12 +43,12 @@ export default function LoadingScreen() {
       </p>
 
       {/* Progress bar */}
-      <div className="w-48 h-2 rounded-full overflow-hidden" style={{ background: 'rgba(29,43,69,0.1)' }}>
+      <div className="w-48 h-2 rounded-full overflow-hidden" style={{ background: 'var(--color-border)' }}>
         <div
           className="h-full rounded-full transition-all duration-200"
           style={{
             width: `${Math.min(progress, 100)}%`,
-            background: 'linear-gradient(90deg, var(--color-orange), var(--color-orange-light))',
+            background: 'var(--color-orange)',
           }}
         />
       </div>

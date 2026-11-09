@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react'
 import { sfx } from '../lib/audio.js'
 
-const COLORS = ['#FF962D', '#FFAE2D', '#F5B400', '#8B5CF6', '#4A90D9', '#34A853', '#EA4335'];
+const COLORS = ['#ffcc66', '#ffd680', '#fbbf24', '#a78bfa', '#60a5fa', '#4ade80', '#f87171'];
 const SHAPES = ['⭐', '🎉', '✨', '🌟', '🎊', '💫', '🏆'];
 
 export default function Celebration({ data, onContinue }) {
@@ -32,7 +32,7 @@ export default function Celebration({ data, onContinue }) {
       className="min-h-screen flex flex-col items-center justify-center px-6 relative overflow-hidden"
       style={{
         minHeight: '100dvh',
-        background: 'linear-gradient(135deg, #FDF9E9 0%, #FDFBF5 50%, #EBF6F9 100%)',
+        background: 'var(--color-bg)',
       }}
     >
       {/* Confetti */}
@@ -55,7 +55,7 @@ export default function Celebration({ data, onContinue }) {
       {/* Big star */}
       <div
         className="text-8xl mb-6 animate-star-burst"
-        style={{ filter: 'drop-shadow(0 8px 24px rgba(255,150,45,0.4))' }}
+        style={{ filter: 'drop-shadow(0 8px 24px rgba(255,204,102,0.4))' }}
       >
         🏆
       </div>
@@ -64,7 +64,7 @@ export default function Celebration({ data, onContinue }) {
       {showText && (
         <div className="text-center animate-pop-in">
           <h1 className="font-display text-3xl font-bold mb-3" style={{ color: 'var(--color-navy)' }}>
-            Umer Jamali Beautiful
+            Shabash!
           </h1>
           <div className="flex gap-2 justify-center mb-4">
             {[0, 1, 2].map(i => (
@@ -90,10 +90,11 @@ export default function Celebration({ data, onContinue }) {
       {showButton && (
         <button
           onClick={() => { sfx.click(); onContinue(); }}
-          className="mt-8 px-10 py-4 rounded-full text-white font-bold text-lg transition-transform active:scale-95 animate-glow"
+          className="mt-8 px-10 py-4 rounded-full font-bold text-lg transition-transform active:scale-95 animate-glow"
           style={{
-            background: 'linear-gradient(135deg, var(--color-orange-light), var(--color-orange))',
-            boxShadow: '0 8px 24px rgba(255,150,45,0.3)',
+            background: 'var(--color-orange)',
+            color: '#1a1d29',
+            boxShadow: '0 8px 24px rgba(255,204,102,0.3)',
           }}
         >
           Jari Rakho →
@@ -108,8 +109,8 @@ export default function Celebration({ data, onContinue }) {
               key={i}
               className="w-12 h-12 rounded-full flex items-center justify-center text-2xl animate-pop-in"
               style={{
-                background: 'rgba(255,255,255,0.6)',
-                border: '2px solid rgba(255,150,45,0.3)',
+                background: 'var(--color-card)',
+                border: '2px solid var(--color-border)',
                 animationDelay: `${0.2 + i * 0.1}s`,
               }}
             >

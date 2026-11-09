@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import { sfx, startBgm, stopBgm } from '../lib/audio.js'
 
+const btnGhost = { background: 'var(--color-card)', border: '1px solid var(--color-border)', color: 'var(--color-navy)' };
+const cardBg = { background: 'var(--color-card)', border: '1px solid var(--color-border)' };
+
 export default function Settings({ state, onSave, onReset, onBack }) {
   const [musicOn, setMusicOn] = useState(state.musicOn !== false);
   const [musicVolume, setMusicVolume] = useState(state.musicVolume ?? 0.11);
@@ -10,10 +13,6 @@ export default function Settings({ state, onSave, onReset, onBack }) {
   const handleMusicToggle = (v) => {
     setMusicOn(v);
     if (v) startBgm(); else stopBgm();
-  };
-
-  const handleVolume = (v) => {
-    setMusicVolume(v);
   };
 
   const handleSave = () => {
@@ -33,18 +32,18 @@ export default function Settings({ state, onSave, onReset, onBack }) {
         <button
           onClick={() => { sfx.click(); onBack(); }}
           className="px-4 py-2 rounded-full text-sm font-semibold transition-transform active:scale-95"
-          style={{ background: 'rgba(29,43,69,0.06)', color: 'var(--color-navy)' }}
+          style={btnGhost}
         >
           ← Wapas
         </button>
-        <h1 className="font-display text-lg font-bold" style={{ color: 'var(--color-navy)' }}>
+        <h1 className="font-display text-lg font-bold uppercase tracking-wide" style={{ color: 'var(--color-navy)' }}>
           SETTINGS
         </h1>
         <div className="w-16" />
       </header>
 
       {/* Music toggle */}
-      <div className="p-4 rounded-2xl mb-4" style={{ background: 'rgba(29,43,69,0.04)', border: '1px solid rgba(29,43,69,0.08)' }}>
+      <div className="p-4 rounded-2xl mb-4" style={cardBg}>
         <div className="flex items-center justify-between mb-3">
           <div>
             <p className="font-semibold text-sm" style={{ color: 'var(--color-navy)' }}>
@@ -57,18 +56,15 @@ export default function Settings({ state, onSave, onReset, onBack }) {
           <button
             onClick={() => handleMusicToggle(!musicOn)}
             className="w-14 h-8 rounded-full transition-colors relative"
-            style={{
-              background: musicOn ? 'var(--color-orange)' : 'rgba(29,43,69,0.15)',
-            }}
+            style={{ background: musicOn ? 'var(--color-orange)' : 'var(--color-border)' }}
           >
             <span
-              className="absolute top-1 w-6 h-6 rounded-full bg-white transition-all shadow-sm"
-              style={{ left: musicOn ? '30px' : '4px' }}
+              className="absolute top-1 w-6 h-6 rounded-full transition-all shadow-sm"
+              style={{ left: musicOn ? '30px' : '4px', background: musicOn ? '#1a1d29' : '#6b6d7a' }}
             />
           </button>
         </div>
 
-        {/* Volume slider */}
         {musicOn && (
           <div className="mt-2">
             <label className="text-xs" style={{ color: 'var(--color-gray-text)' }}>
@@ -80,7 +76,7 @@ export default function Settings({ state, onSave, onReset, onBack }) {
               max="0.3"
               step="0.01"
               value={musicVolume}
-              onChange={e => handleVolume(parseFloat(e.target.value))}
+              onChange={e => setMusicVolume(parseFloat(e.target.value))}
               className="w-full mt-1"
               style={{ accentColor: 'var(--color-orange)' }}
             />
@@ -89,7 +85,7 @@ export default function Settings({ state, onSave, onReset, onBack }) {
       </div>
 
       {/* SFX toggle */}
-      <div className="p-4 rounded-2xl mb-4" style={{ background: 'rgba(29,43,69,0.04)', border: '1px solid rgba(29,43,69,0.08)' }}>
+      <div className="p-4 rounded-2xl mb-4" style={cardBg}>
         <div className="flex items-center justify-between">
           <div>
             <p className="font-semibold text-sm" style={{ color: 'var(--color-navy)' }}>
@@ -102,13 +98,11 @@ export default function Settings({ state, onSave, onReset, onBack }) {
           <button
             onClick={() => { setSfxOn(!sfxOn); if (!sfxOn) sfx.click(); }}
             className="w-14 h-8 rounded-full transition-colors relative"
-            style={{
-              background: sfxOn ? 'var(--color-orange)' : 'rgba(29,43,69,0.15)',
-            }}
+            style={{ background: sfxOn ? 'var(--color-orange)' : 'var(--color-border)' }}
           >
             <span
-              className="absolute top-1 w-6 h-6 rounded-full bg-white transition-all shadow-sm"
-              style={{ left: sfxOn ? '30px' : '4px' }}
+              className="absolute top-1 w-6 h-6 rounded-full transition-all shadow-sm"
+              style={{ left: sfxOn ? '30px' : '4px', background: sfxOn ? '#1a1d29' : '#6b6d7a' }}
             />
           </button>
         </div>
@@ -117,8 +111,8 @@ export default function Settings({ state, onSave, onReset, onBack }) {
       {/* Save button */}
       <button
         onClick={handleSave}
-        className="w-full py-3.5 rounded-full text-white font-bold text-base transition-transform active:scale-95 mb-4"
-        style={{ background: 'linear-gradient(135deg, var(--color-orange-light), var(--color-orange))' }}
+        className="w-full py-3.5 rounded-full font-bold text-base transition-transform active:scale-95 mb-4"
+        style={{ background: 'var(--color-orange)', color: '#1a1d29' }}
       >
         Save Karein
       </button>
@@ -130,15 +124,15 @@ export default function Settings({ state, onSave, onReset, onBack }) {
             onClick={() => setShowResetConfirm(true)}
             className="w-full py-3 rounded-full text-sm font-semibold transition-transform active:scale-95"
             style={{
-              background: 'rgba(234,67,53,0.06)',
+              background: 'rgba(248,113,113,0.08)',
               color: 'var(--color-wrong)',
-              border: '1px solid rgba(234,67,53,0.15)',
+              border: '1px solid rgba(248,113,113,0.2)',
             }}
           >
             🗑️ Progress Reset Karein
           </button>
         ) : (
-          <div className="p-4 rounded-2xl" style={{ background: 'rgba(234,67,53,0.06)', border: '1px solid rgba(234,67,53,0.15)' }}>
+          <div className="p-4 rounded-2xl" style={{ background: 'rgba(248,113,113,0.08)', border: '1px solid rgba(248,113,113,0.2)' }}>
             <p className="text-sm mb-3 text-center" style={{ color: 'var(--color-wrong)' }}>
               Kya aap waqai sab progress reset karna chahte hain?
             </p>
@@ -153,7 +147,7 @@ export default function Settings({ state, onSave, onReset, onBack }) {
               <button
                 onClick={() => setShowResetConfirm(false)}
                 className="flex-1 py-2.5 rounded-full text-sm font-semibold transition-transform active:scale-95"
-                style={{ background: 'rgba(29,43,69,0.06)', color: 'var(--color-navy)' }}
+                style={btnGhost}
               >
                 Nahi
               </button>
